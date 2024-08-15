@@ -1,0 +1,17 @@
+list_ = []
+dataframes_ = {}
+lista_prints = []
+id_pasta_log = []
+id_arquivo_log = []
+id_pasta_input = []
+id_pasta_output = []
+format_ = 'xlsx'
+blob_container_name = "config"
+blob_directory_path = "rpa"
+blob_file_name = "parameters.json"
+blob_account_name = "stoazure"
+servidor_smtp = 'smtp.office365.com'
+para_email = 'rpas@empresa.com.br'
+porta_smtp = 123
+settings = '/settings.json'
+tabelaLog = 'Logs_RPAs'

@@ -234,11 +234,11 @@ try:
     # Exclui o conteúdo da pasta de downloads, incluindo subpastas e arquivos
     delete_folder_contents(caminho_origem)
     registrar_print(f"FINALIZOU O RPA.")
+    conn.commit()  # commitando as mudanças
 
     # Salvando o log no banco de dados, antes de fechar a conexão
-    registrar_log(cursor, lista_prints)
+    registrar_log(cursor, conn, lista_prints)
 
-    conn.commit()  # commitando as mudanças
     conn.close()  # fechando conexao
     registrar_print("DADOS INJETADOS COM SUCESSO.")
 
@@ -249,5 +249,5 @@ except Exception:
     registrar_print(
         f"Ocorreu um erro no servidor {server_sharepoint}:\n{traceback_str}")
     enviar_email(lista_prints, lista_prints[0])
-    registrar_log(cursor, lista_prints)
+    registrar_log(cursor, conn, lista_prints)
     criar_log(user_id, pasta_id=id_pasta_log[0], lista_prints=lista_prints)

@@ -1,7 +1,7 @@
 ### INCIANDO O SCRIPT ###
 """ 
 bibliotecas padrão necessárias:
-'msal', 'traceback', 'requests', 'azure.storage.blob', 'azure.identity', 'tabula', 'smtplib'
+'msal', 'traceback', 'requests', 'azure.storage.blob', 'azure.identity', 'tabula', 'smtplib', 'pandas', 'openpyxl'
 
 adicione suas bibliotecas para o desenvolvimento do rpa
 """
@@ -79,7 +79,7 @@ def check_install_libs():
 
         # Lista de bibliotecas que você precisa verificar
         bibliotecas = ['msal', 'traceback', 'requests', 'azure-storage-blob', 'azure-identity',
-                       'tabula', 'datetime', 'pyodbc', 'io', 'zipfile', 'unidecode', 'selenium', 'time', 'csv', 're', 'smtplib', 'openpyxl', 'tqdm']
+                       'tabula', 'datetime', 'pyodbc', 'io', 'zipfile', 'unidecode', 'selenium', 'time', 'csv', 're', 'smtplib', 'openpyxl', 'tqdm', 'pandas']
 
         # Verifica se cada biblioteca está instalada e, se necessário, instala
         for biblioteca in bibliotecas:

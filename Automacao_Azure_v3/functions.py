@@ -679,7 +679,7 @@ def capturar_id(x, y, z):
                                                         id_pasta_e)
 
 
-def registrar_log(cursor, lista_prints):
+def registrar_log(cursor, conn, lista_prints):
     """
     Registra um log na tabela especificada no banco de dados. Se a tabela não existir, ela será criada.
 
@@ -718,5 +718,6 @@ def registrar_log(cursor, lista_prints):
         cursor.execute(f"INSERT INTO {tabelaLog} (vc_nm_nome, vc_ds_descricao, vc_dt_data_inicio, vc_dt_data_fim, sd_data_hora_carga) VALUES (?, ?, ?, ?, ?)",
                        (lista_prints[0], texto_rpa, lista_prints[1], data_hora_atual(frmt='data_log'), data_hora_atual(frmt='data_bd')))
         print(f'Log inserido na tabela {tabelaLog} com sucesso.')
+        conn.commit()
     except Exception:
         print(f"Erro ao registrar log.")

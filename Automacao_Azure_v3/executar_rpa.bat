@@ -3,7 +3,7 @@ REM Captura o nome do usuário
 set USER_NAME=%USERNAME%
 
 REM Navega para o diretório onde está o ambiente virtualL
-cd /d "C:\Users\%USER_NAME%\Documentos\Automacao_Azure_v3"
+cd /d "%~dp0"
 
 REM Verifica se o venv existe
 IF NOT EXIST "venv\Scripts\activate.bat" (

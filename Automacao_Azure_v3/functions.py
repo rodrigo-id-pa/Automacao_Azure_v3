@@ -679,7 +679,7 @@ def capturar_id(x, y, z):
                                                         id_pasta_e)
 
 
-def registrar_log(cursor, conn, lista_prints):
+def registrar_log(server, base, lista_prints):
     """
     Registra um log na tabela especificada no banco de dados. Se a tabela não existir, ela será criada.
 
@@ -690,7 +690,16 @@ def registrar_log(cursor, conn, lista_prints):
             - lista_prints[1] é a data de início.
             - lista_prints[2:] contém a descrição do RPA.
     """
+    conn = None
     try:
+        # Conectando ao banco de dados
+        conn = pyodbc.connect(
+            f'Driver=SQL Server;Server={server};Database={base};')
+
+        # Criando um cursor para executar as operações no banco de dados
+        cursor = conn.cursor()
+        cursor.fast_executemany = True
+
         table_exists_query = f"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{
             tabelaLog}'"
         cursor.execute(table_exists_query)
@@ -721,3 +730,6 @@ def registrar_log(cursor, conn, lista_prints):
         conn.commit()
     except Exception:
         print(f"Erro ao registrar log.")
+    finally:
+        if conn:
+            conn.close()

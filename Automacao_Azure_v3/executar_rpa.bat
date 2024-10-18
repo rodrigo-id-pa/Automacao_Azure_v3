@@ -1,7 +1,4 @@
 @echo off
-REM Captura o nome do usuário
-set USER_NAME=%USERNAME%
-
 REM Navega para o diretório onde está o ambiente virtualL
 cd /d "%~dp0"
 

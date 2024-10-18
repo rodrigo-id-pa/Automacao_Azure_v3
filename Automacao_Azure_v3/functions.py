@@ -733,3 +733,4 @@ def registrar_log(server, base, lista_prints):
     finally:
         if conn:
             conn.close()
+        print(f"Conexão encerrada da tabela {tabelaLog}.")

@@ -11,7 +11,7 @@ import subprocess
 import datetime
 import os
 import json
-
+import sys
 
 # Obtém o diretório atual
 def arquivo_local():
@@ -66,38 +66,48 @@ registrar_print('INICIOU A EXECUÇÃO FLOW CONFIG')
 
 
 # verificando se o pip está atualizado e as bibliotecas de uso deste RPA
-def check_install_libs():
+def verificar_libs():
+    """
+    Verifica se o pip e as bibliotecas necessárias estão instaladas.
+
+    Caso alguma biblioteca não esteja presente, tenta instalá-la automaticamente.
+
+    Raises:
+        Exception: Se ocorrer falha na verificação ou instalação de dependências.
+    """
     try:
+        print("Verificando se pip e bibliotecas necessárias estão instaladas...")
         try:
             import pip
             print('pip já está instalado.')
         except ImportError:
             print('pip não está instalado. Atualizando...')
-            subprocess.check_call(
-                ['python.exe', '-m', 'pip', 'install', '--upgrade', 'pip'])
+            subprocess.run(
+                ['python.exe', '-m', 'pip', 'install', '--upgrade', 'pip'],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
             print('pip atualizado com sucesso.')
 
-        # Lista de bibliotecas que você precisa verificar
-        bibliotecas = ['msal', 'traceback', 'requests', 'azure-storage-blob', 'azure-identity',
-                       'tabula', 'datetime', 'pyodbc', 'io', 'zipfile', 'unidecode', 'selenium', 'time', 'csv', 're', 'smtplib', 'openpyxl', 'tqdm', 'pandas']
+        bibliotecas = ['requests', 'zeep', 'pandas', 'numpy',
+                       'azure-servicebus', 'openpyxl', 'Unidecode']
 
-        # Verifica se cada biblioteca está instalada e, se necessário, instala
         for biblioteca in bibliotecas:
             try:
                 importlib.import_module(biblioteca)
                 print(f'{biblioteca} já está instalada.')
             except ImportError:
                 print(f'{biblioteca} não está instalada. Instalando...')
-                subprocess.check_call(
-                    ['pip', 'install', '--upgrade', biblioteca])
+                subprocess.run(
+                    [sys.executable, '-m', 'pip', 'install', biblioteca],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
                 print(f'{biblioteca} instalada com sucesso.')
-        registrar_print('FLOW CONFIG REALIZADO COM SUCESSO')
     except Exception as e:
-        import traceback
-        data_error = data_hora_atual(frmt='data_log')
-        traceback_str = traceback.format_exc()
-        registrar_print(
-            f"Ocorreu um erro:\n{traceback_str}, {data_error}, {e}")
+        _, data_error, _ = data_hora_atual()
+        print(
+            f"Ocorreu um erro:\n{data_error}, {e}")
 
 
-check_install_libs()
+verificar_libs()

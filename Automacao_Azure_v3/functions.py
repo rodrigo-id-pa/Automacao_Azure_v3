@@ -526,7 +526,7 @@ def inserir_dados(cursor, table_name, data_frame):
                 row['COD_GRANDE_GRUPO'], row['COD_SUBGRUPO_PRINCIPAL'], row['COD_SUBGRUPO'], row['COD_FAMILIA'], row['COD_OCUPACAO'], row[
                     'SGL_GRANDE_AREA'], row['NOME_GRANDE_AREA'], row['COD_ATIVIDADE'], row['NOME_ATIVIDADE'], row['data_hora_carga']
             )
-            for _, row in tqdm(data_frame.iterrows(), total=len(data_frame))
+            for _, row in tqdm(data_frame.iterrows(), total=len(data_frame), desc=f'Inserindo dados da tabela {table_name}')
         ]
         print(
             f'Iniciou a inserção da {table_name} em:', data_hora_atual(frmt='data_bd'))
@@ -540,7 +540,7 @@ def inserir_dados(cursor, table_name, data_frame):
             (
                 row['CODIGO'], row['TITULO'], row['data_hora_carga']
             )
-            for _, row in tqdm(data_frame.iterrows(), total=len(data_frame))
+            for _, row in tqdm(data_frame.iterrows(), total=len(data_frame), desc=f'Inserindo dados da tabela {table_name}')
         ]
         print(
             f'Iniciou a inserção da {table_name} em:', data_hora_atual(frmt='data_bd'))
